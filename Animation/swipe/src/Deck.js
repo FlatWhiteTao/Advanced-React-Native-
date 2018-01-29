@@ -24,7 +24,7 @@ class Deck extends Component {
       onStartShouldSetPanResponder :() => true,
       // user drags a component on screen
       onPanResponderMove: (event, gesture) => {
-        position.setValue({ x: gesture.dx, y: gesture.dy });
+        position.setValue({ x: gesture.dx, y: 0 });
       },
       // handle the end of gesture
       onPanResponderRelease: (event, gesture) => {
@@ -98,9 +98,12 @@ class Deck extends Component {
       }
 
       return (
-        <View key={item.id} style={styles.cardStyle}>
+        <Animated.View
+          key={item.id}
+          style={[styles.cardStyle,{ top: 1 * (i - this.state.index)}]}
+        >
           {this.props.renderCard(item)}
-        </View>
+        </Animated.View>
       );
     }).reverse();
   }
